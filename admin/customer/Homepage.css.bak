@@ -1,0 +1,31 @@
+
+body
+ {
+     background-color:blue;
+
+ }
+ body{
+	 background-image:url("back.jpg");
+ }
+ img{
+	 display:block;
+	 margin-right:auto;
+	 margin-left:auto;
+ }
+     
+h1, { 
+ font-family:"Arial,Helvetica,sans-serif;
+ }
+ h1{
+  color: green;
+  text-align: center;
+}
+
+h4 {
+	color:green;
+    text-align:center;
+}
+table{
+  text-align: center;
+  color:purple;
+}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>login form</title>
+<link rel="stylesheet" href="Login.css">
+</head>
+<body>
+<a href="homepage.html">Home</a>
+<hr/>
+<h2 align="center">CUSTOMER LOGIN FORM</h2>
+<form>
+<div Class="container">
+<label>Username:</label>
+<input type ="text" placeholder="Enter username" name="Username"required>
+<br><br>
+<label>Password:</label>
+<input type="text" placeholder="Enter password" name="Password"required>
+<br><br>
+<button>SUBMIT</Button><br><br>
+<a href="registration form.html">Don't have an account?Signup.</a>
+
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Admin page</title>
+  <link rel="stylesheet"href="placeorder.css">
+</head>
+<body>
+
+
+    <script src="admin.js" > </script>
+  <div class="navbar">
+    <a class="active" href="home.php"><i class="fa fa-fw fa-home"></i> Home</a>
+    <a href="#"><i class="fa fa-fw fa-search"></i> Search</a>
+    <a href="#"><i class="fa fa-fw fa-envelope"></i> Traffic</a>
+    <a href="#"><i class="fa fa-fw fa-user"></i> Faq</a>
+    <a href="#"><i class="fa fa-fw fa-user"></i> dashboard</a>
+    <a href="#"><i class="fa fa-fw fa-user"></i> Store</a>
+    <a href="#"><i class="fa fa-fw fa-user"></i> Orders</a>
+    <a href="#"><i class="fa fa-fw fa-user"></i> <a href="?sign=out"> Logout</a></a>
+    </span>
+  </div>
+<style>
+  .navbar {
+  width: 100%;
+  background-color: #555;
+  overflow: auto;
+}
+
+/* Navbar links */
+.navbar a {
+  float: left;
+  text-align: center;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Navbar links on mouse-over */
+.navbar a:hover {
+  background-color: rgb(17, 114, 232);
+}
+
+/* Current/active navbar link */
+.active {
+  background-color: #04AA6D;
+}
+
+/* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels */
+@media screen and (max-width: 500px) {
+  .navbar a {
+    float: none;
+    display: block;
+  }
+}
+
+
+
+
+
+</style>
+<br>
+<input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." title="Type in a category">
+<?php
+ echo $_SESSION['user_id'];
+ ?>
+<style>
+  /* Style the search box */
+#mySearch {
+  width: 100%;
+  font-size: 18px;
+  padding: 11px;
+  border: 1px solid #ddd;
+}
+
+/* Style the navigation menu */
+#myMenu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Style the navigation links */
+#myMenu li a {
+  padding: 12px;
+  text-decoration: none;
+  color: black;
+  display: block
+}
+
+#myMenu li a:hover {
+  background-color: #eee;
+}
+
+</style>
+<div class ="row">
+ <h2 align='center'>Add New Product</h2>
+    <div class="container">
+<form action="addproduct.php" method="POST" enctype="multipart/form-data">
+<div class="row">
+   <div class ="col-25">
+    <label for= "name">Product ID</label>
+   </div>
+  <div class ="col-75">
+  <input type="text" id="pid" name="pid" placeholder="product id..">
+   </div>
+</div>
+
+<div class ="row">
+<div class="col-25">
+ <label for ="name">Product Name </label>
+</div>
+<div class ="col-75">
+  <input type="text" id="pname" name="pname" placeholder="product name..">
+ </div>
+</div>
+
+    <div class="row">
+   <div class="col-25">
+<label for="name">Product Type</label>
+</div>
+<div class="col-75">
+   <select id="ptype" name="ptype">
+   <option value="cloth">Boys Collection</option>
+<option value="cloth">Girls Collection</option>
+<option value="cosmetics">Cosmetics Collection</option>
+</select>
+</div>
+</div>
+
+<div class="row">
+   <div class="col-25">
+    <label for="bname">Brand Name</label>
+</div>
+   <div class="col-75">
+    <input type="text" id="bname" name="bname" placeholder="Brand name..">
+</div>
+</div>
+
+<div class ="row">
+   <div class="col-25">
+         <label for ="bprice">Buying Price</label>
+</div>
+<div class="col-75">
+<input type="text" id="bprice" name="bprice" placeholder="Buying Price..">
+</div>
+</div>
+
+
+    <div class="row">
+   <div class="col-25">
+<label for ="image">Product Image</label>
+</div>
+<div class="col-75">
+ <input type="file" id="image" name="pic">
+</div>
+</div>
+
+<div class="row">
+   <input type="submit" value="Add" name="submit">
+</div>
+</form>
+</div>
+</div>
+<body>
+</html>
+
+<?php
+ include("../connection.php");
+ if(isset($_POST['submit']))
+ {
+$pid=$_POST['pid'];
+$pname=$_POST['pname'];
+$ptype=$_POST['ptype'];
+$bname=$_POST['bname'];
+$bprice=$_POST['bprice'];
+
+//image upload code
+$ext= explode(".",$_FILES['pic'] ['name']);
+$c=count($ext);
+$ext=$ext[$c-1];
+$date=date("D:M:Y");
+$time=date("h:i:s");
+$image_name=md5($date.$time.$pid);
+$image=$image_name.".".$ext;
+
+$query="insert into product values('$pid','$pname','$ptype','$bname','$bprice','$image')";
+if(mysqli_query($con,$query))
+{
+echo "Successfully inserted!";
+if($image !=null){
+         move_uploaded_file($_FILES['pic']['tmp_name'],"../uploadedimage/$image");
+           }
+}
+     else
+{
+       echo "error!".mysqli_error($con);
+}
+ }
+?>
+
+
+
